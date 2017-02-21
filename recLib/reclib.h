@@ -15,6 +15,8 @@
 #include <vector>
 #include <cmath>
 #include <iostream>
+#include <memory>
+#include <sstream>
 using namespace std;
 
 //bring in cryptopp
@@ -26,6 +28,13 @@ using namespace std;
 #include <cryptopp/sha.h>
 #include <cryptopp/config.h>
 using namespace CryptoPP;
+
+//bring in Berkeley Sockets :D
+//...and some c/GNU stuff
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netdb.h>
+#include <strings.h>
 
 /**
  * Base namespace def

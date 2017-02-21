@@ -8,7 +8,20 @@ namespace Rec{
 class Socket
 {
 public:
-    Socket();
+    Socket(bool listener=true, string portno="42420", string addr="");
+    ~Socket();
+    bool ErrorState();
+    string ErrorMsg();
+private:
+    bool error;
+    bool listener;
+    bool connected;
+    string error_msg;
+    int sockfd;
+    short portno;
+    struct addrinfo *servinfo;
+
+
 };
 
 

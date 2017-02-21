@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <reclib.h>
+using namespace Rec;
 
 namespace Ui {
 class MainWindow;
