@@ -12,8 +12,19 @@ namespace Rec{
  */
 
 
-Socket::Socket(bool _listener, string portno, string addr) : listener(_listener)
+TCPSocket::TCPSocket(bool _listener, string portno, string addr)
 {
+    this->Create(_listener, portno, addr);
+}
+
+TCPSocket::~TCPSocket(){
+        freeaddrinfo(servinfo); //and hints goes out of scope
+}
+
+
+void TCPSocket::Create(bool _listener, string portno, string addr){
+    this->listener = _listener;
+
     int status;
     struct addrinfo hints;
 
@@ -48,26 +59,25 @@ Socket::Socket(bool _listener, string portno, string addr) : listener(_listener)
         return;
     }
 
-    sockfd = 0;
+    this->sockfd = 0;
     bool failure = false;
     struct addrinfo * current_addr;
-    while(sockfd <= 0 && !failure){
+    while(this->sockfd <= 0 && !failure){
         current_addr = this->servinfo->ai_next;
         if(current_addr == NULL){
             failure = true;
-            break;
+            cerr << "Failed to make socket: \"" << addr << "\":\"" << portno << "\" ..." << endl;
+            cerr << "Total failure. Socket is invalid." << endl;
+            return;
         }
-        s = socket(current_addr->ai_family, current_addr->ai_socktype, current_addr->ai_protocol);
-        if(s<0){
-            cerr << "Failed to make socket: \"" << add << "\":\"" << portno << "\" ..." << endl;
+        this->sockfd = socket(current_addr->ai_family, current_addr->ai_socktype, current_addr->ai_protocol);
+        if(this->sockfd < 0){
+            cerr << "Failed to make socket: \"" << addr << "\":\"" << portno << "\" ..." << endl;
         }
 
     }
 }
 
-Socket::~Socket(){
-        freeaddrinfo(servinfo); //and hints goes out of scope
-}
 
 }
 

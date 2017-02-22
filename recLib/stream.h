@@ -7,8 +7,10 @@ class Stream
 {
 public:
     Stream(int);
-private:
+    template <class T>
+        void ReadArray(T input[], ssize_t len);
 
+private:
 
 
 };

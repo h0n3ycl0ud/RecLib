@@ -5,11 +5,12 @@
 namespace Rec{
 
 
-class Socket
+class TCPSocket
 {
 public:
-    Socket(bool listener=true, string portno="42420", string addr="");
-    ~Socket();
+    TCPSocket(bool listener=true, string portno="42420", string addr="");
+    ~TCPSocket();
+    void Create(bool listener=true, string portno="42420", string addr="");
     bool ErrorState();
     string ErrorMsg();
 private:

@@ -42,7 +42,7 @@ using namespace CryptoPP;
  */
 namespace Rec{
     class Stream;
-    class Socket;
+    class TCPSocket;
 
 }
 #endif // RECLIB_H
